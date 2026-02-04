@@ -3,12 +3,15 @@ import MarkdownRenderer from "../MarkdownRenderer";
 import "../../style/Mulank/mulank_calc.css";
 import { API_BASE } from "../../utils/streamAI";
 
+
 function Mulank_calc() {
   const [birthDate, setBirthDate] = useState("");
   const [mulank, setMulank] = useState("--");
   const [meaning, setMeaning] = useState("");
   const [details, setDetails] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // const [language, setLanguage] = useState("en"); // default English
+
 
   const reduce = (num) => {
     let sum = 0;
@@ -125,7 +128,7 @@ function Mulank_calc() {
     setMeaning(meanings[result]);
     setDetails("");
 
-    const url = `${API_BASE}/api/mulank-stream?birthdate=${birthDate}&mulank=${result}`;
+    const url = `${API_BASE}/api/mulank-stream?birthdate=${birthDate}&mulank=${result}&language=${language}`;
     streamAI(url);
   };
 
@@ -146,6 +149,11 @@ function Mulank_calc() {
               onChange={(e) => setBirthDate(e.target.value)}
             />
           </div>
+
+          {/* <LanguageSelect
+            language={language}
+            setLanguage={setLanguage}
+          /> */}
 
           <button
             className="calculate-btn"
